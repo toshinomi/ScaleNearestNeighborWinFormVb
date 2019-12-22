@@ -2,30 +2,54 @@
 Imports System.Threading
 Imports System.Runtime.InteropServices.Marshal
 
+''' <summary>
+''' 最近傍補間法のロジック
+''' </summary>
 Public Class ScaleNearestNeighbor
     Private m_bitmap As Bitmap
     Private m_progressBar As ProgressBar
 
+    ''' <summary>
+    ''' ビットマップ
+    ''' </summary>
     Public ReadOnly Property bitmap() As Bitmap
         Get
             Return m_bitmap.Clone()
         End Get
     End Property
 
+    ''' <summary>
+    ''' プログレスバー
+    ''' </summary>
     Public WriteOnly Property progressBar() As ProgressBar
         Set(value As ProgressBar)
             m_progressBar = value
         End Set
     End Property
 
+    ''' <summary>
+    ''' コンストラクタ
+    ''' </summary>
+    ''' <param name="_progressBar">プログレスバー</param>
     Public Sub New(_progressBar As ProgressBar)
         m_progressBar = _progressBar
     End Sub
 
+    ''' <summary>
+    ''' 初期化
+    ''' </summary>
     Public Sub Init()
         m_bitmap = Nothing
     End Sub
 
+    ''' <summary>
+    ''' 最近傍補間法の実行
+    ''' </summary>
+    ''' <param name="_bitmap">ビットマップ</param>
+    ''' <param name="_fScale">スケール</param>
+    ''' <param name="_token">キャンセルトークン</param>
+    ''' <param name="_form">フォーム</param>
+    ''' <returns>実行結果 成功/失敗</returns>
     Public Function GoImgProc(_bitmap As Bitmap, _fScale As Single, _token As CancellationToken, _form As Form) As Boolean
         Dim bRst As Boolean = True
 
@@ -79,6 +103,10 @@ Public Class ScaleNearestNeighbor
         Return bRst
     End Function
 
+    ''' <summary>
+    ''' プログレスバーの設定
+    ''' </summary>
+    ''' <param name="_nCount">カウント</param>
     Private Sub SetProgressBar(_nCount As Integer)
         m_progressBar.Value = _nCount
     End Sub
