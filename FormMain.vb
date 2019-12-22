@@ -159,6 +159,7 @@ Public Class FormMain
     ''' <summary>
     ''' 画像処理実行用のタスク
     ''' </summary>
+    ''' <param name="_bitmap">ビットマップ</param>
     ''' <returns>画像処理の実行結果 成功/失敗</returns>
     Public Function TaskWorkImageProcessing(_bitmap As Bitmap)
         m_tokenSource = New CancellationTokenSource()
